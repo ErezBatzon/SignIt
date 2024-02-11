@@ -42,10 +42,10 @@ const FillPanel = ({
       </div>
       <div className="fill-navigation-buttons">
         <button onClick={() => onSetFocusToNextField()} className="next">
-          שדה הבא
+         הבא
         </button>
         <button onClick={() => onSetFocusToPrevField()} className="previous">
-          שדה קודם
+           הקודם
         </button>
       </div>
     </div>

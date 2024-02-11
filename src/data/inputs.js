@@ -37,7 +37,7 @@ const data = [
       positionY: 84,
       width:10,
       page: 1,
-      description: 'שם'
+      description: 'תאריך לידה'
     },
     {
       id:5,
@@ -47,7 +47,7 @@ const data = [
       positionY: 40.5,
       width:10,
       page: 2,
-      description: 'מועד'
+      description: 'עיר מגורים'
     },
   ];
 
