@@ -55,10 +55,10 @@ const Input = ({
         canvas.width = image.width; // Multiply by a factor to enlarge
         canvas.height = image.height; // Multiply by a factor to enlarge
         ctx.drawImage(image, 0, 0);
-      };
+    };
       image.src = currentValue[input.id];
     }
-  }, [activeInput,currentValue[input.id]]);
+  }, [activeInput]);
 
 
 

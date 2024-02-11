@@ -11,17 +11,15 @@ const FillPanel = ({
   currentValue,
 }) => {
   useEffect(() => {
-    // if (currentInputObj.type !== "signature") {
-    //   mainInputRef.current.classList.add("main-input-zoon-in");
-    //   setTimeout(() => {
-    //     mainInputRef.current.classList.remove("main-input-zoon-in");
-    //     mainInputRef.current.classList.add("zoom-out");
-    //   }, 500);
+      mainInputRef.current.classList.add("main-input-zoon-in");
+      setTimeout(() => {
+        mainInputRef.current.classList.remove("main-input-zoon-in");
+        mainInputRef.current.classList.add("zoom-out");
+      }, 500);
 
-    //   return () => {
-    //     mainInputRef.current.classList.remove("main-input-zoon-in", "zoom-out");
-    //   };
-    // }
+      return () => {
+        mainInputRef.current.classList.remove("main-input-zoon-in", "zoom-out");
+      };
   }, [currentInputObj]);
 
   return (

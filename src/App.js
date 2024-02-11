@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   const [activeInput, setActiveInput] = useState(1);
-  const [currentInputObj, setCurrentInputObj] = useState({});
+  const [currentInputObj, setCurrentInputObj] = useState(data[0]);
   const mainInputRef = useRef(null);
   const [inputValues, setInputValues] = useState({});
 
@@ -35,14 +35,10 @@ const App = () => {
   function onSetFocusToSelectedField(input) {
     setActiveInput(input.id);
     setCurrentInputObj(input);
-    if(input.type !== 'signature'){
-      console.log("Here")
-      mainInputRef.current.focus();
-      mainInputRef.current.value = inputValues[input.id] || ''
-    }
+    mainInputRef.current.focus();
+    mainInputRef.current.value = inputValues[input.id] || ''
   }
 
-  
 
   function handleInputText(activeInput, text) {
     handleInputChange(activeInput, text);
