@@ -15,7 +15,8 @@ const FillPanel = ({
       setTimeout(() => {
         mainInputRef.current.classList.remove("main-input-zoon-in");
         mainInputRef.current.classList.add("zoom-out");
-      }, 500);
+      }, 200);
+
 
       return () => {
         mainInputRef.current.classList.remove("main-input-zoon-in", "zoom-out");
@@ -26,7 +27,7 @@ const FillPanel = ({
     <div className="fill-field-panel">
       <div className="input-filler">
         <p className="description">
-          שדה למילוי:{" "}
+         מילוי שדה: {" "}
           <span className="input-description">
             {currentInputObj.description}
           </span>
