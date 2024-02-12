@@ -3,6 +3,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "./App.css";
 import FillPanel from "./components/FillPanel";
 import PdfViewer from "./components/PdfViewer";
+import PdfViewer2 from "./components/PdfViewer2";
 import data from "./data/inputs";
 import Navbar from "./components/Navbar";
 
@@ -47,6 +48,8 @@ const App = () => {
   function handleSignatureData(activeInput, data) {
     handleInputChange(activeInput, data);
   }
+
+  //console.log(mainInputRef.current)
 
   return (
     <div className="page">

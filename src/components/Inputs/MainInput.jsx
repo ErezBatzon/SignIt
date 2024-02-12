@@ -25,7 +25,7 @@ const MainInput = ({
 
   if (currentInputObj.type === "signature") {
     return (
-      <div ref={mainInputRef}>
+      <div ref={mainInputRef} tabIndex={5}>
        <SignatureCanvas
           ref={signatureRef}
           penColor="#0d2d6d"

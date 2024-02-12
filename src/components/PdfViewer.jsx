@@ -1,16 +1,22 @@
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
-import { useState, useEffect } from "react";
+import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
+import { useState, useEffect, useRef } from "react";
 import Input from "./Inputs/Input";
+import { saveAs } from "file-saver";
+import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import * as fontkit from "fontkit";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const PdfViewer = ({
   data,
   activeInput,
   onSetFocusToSelectedField,
-  currentValue
+  currentValue,
 }) => {
   const [numPages, setNumPages] = useState(null);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const canvasRef = useRef(null);
 
   const [ratio, setRatio] = useState(1);
 
@@ -46,16 +52,6 @@ const PdfViewer = ({
     setNumPages(numPages);
   };
 
-  // const goToPrevPage = () =>
-  //   setPageNumber(pageNumber - 1 <= 1 ? 1 : pageNumber - 1);
-
-  // const goToNextPage = () =>
-  //   setPageNumber(pageNumber + 1 >= numPages ? numPages : pageNumber + 1);
-
-  // function onPageLoadSuccess() {
-  //     setPageWidth(window.innerWidth);
-  // }
-
   const debounce = (func, delay) => {
     let timer;
     return function (...args) {
@@ -76,6 +72,57 @@ const PdfViewer = ({
     setCurrentPageNumber(currentPage);
   };
 
+  const handlePageRender = (page, ctx) => {
+    return new Promise((resolve) => {
+      // Draw input fields onto the canvas
+      data.forEach((input) => {
+        if (input.page === page) {
+          // Draw input on canvas
+          ctx.fillText("Hello", 100, 100); // Example drawing text input
+        }
+      });
+
+      // Resolve the promise to indicate that rendering is complete for this page
+      resolve();
+    });
+  };
+
+  const handleSavePdf = async () => {
+    const existingPdfBytes = await fetch("Test.pdf").then((res) =>
+      res.arrayBuffer()
+    );
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    pdfDoc.registerFontkit(fontkit);
+    const fontBytes = await fetch("Arial.ttf").then((res) => res.arrayBuffer());
+    const customFont = await pdfDoc.embedFont(fontBytes);
+
+    const pages = pdfDoc.getPages()
+    for (let i = 1; i <= numPages; i++) {
+      //const [page] = await pdfDoc.copyPages(pdfDoc, [i - 1]);
+        data.forEach((input) => {
+          if (input.page === i) {
+            const x = 100;
+            const y = pages[i-1].getHeight() - 100; // Invert Y-axis
+            const text = "דגכעדגדג";
+            console.log("Here")
+            // Draw text on the page using Helvetica font
+            pages[i-1].drawText(text, {
+              x,
+              y,
+              size: 12,
+              font: customFont,
+              color: rgb(0.1, 0.5, 0.7),
+            });
+          }
+        });
+    }
+
+    const pdfBytes = await pdfDoc.save();
+
+    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    saveAs(blob, "merged_pdf_with_inputs.pdf");
+  };
+
   useEffect(() => {
     // Add event listener for scroll
     window.addEventListener("scroll", handleScroll);
@@ -88,39 +135,14 @@ const PdfViewer = ({
 
   return (
     <div className="main-section">
-      {/* <div className="top-navigation">
-        <div className="navigation-buttons">
-          <button onClick={goToNextPage} className="next">
-            עמוד הבא
-          </button>
-          <button onClick={goToPrevPage} className="previous">
-            עמוד קודם
-          </button>
-        </div>
-        <div>
-          <p>
-            עמוד {pageNumber} מתוך {numPages}
-          </p>
-        </div>
-      </div> */}
       <Document
         className="pdf-viewbox"
         file="Test.pdf"
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        {/* <Page
-          pageNumber={pageNumber}
-          renderAnnotationLayer={false}
-          renderTextLayer={false}
-          //onLoadSuccess={onPageLoadSuccess}
-          //width={Math.max(windowWidth * 0.7 * ratio,390)}
-          width={ratio * windowWidth * 0.75}
-        >
-          {inputs}
-        </Page> */}
-
         {Array.from(new Array(numPages), (el, index) => (
           <div className="pdf-page" key={`page_wrapper_${index + 1}`}>
+            <button onClick={handleSavePdf}>Save PDF with Inputs</button>
             <p>
               עמוד {index + 1} מתוך {numPages}
             </p>
@@ -129,14 +151,23 @@ const PdfViewer = ({
               pageNumber={index + 1}
               renderAnnotationLayer={false}
               renderTextLayer={false}
-              width={windowWidth <= 600 ? windowWidth*0.85 : ratio * windowWidth * 0.75} // Adjust width as needed
+              width={
+                windowWidth <= 600
+                  ? windowWidth * 0.85
+                  : ratio * windowWidth * 0.75
+              } // Adjust width as needed
+              onRenderSuccess={() => handlePageRender(index + 1)}
             >
-              {handleInputs(index +1)}
+              {handleInputs(index + 1)}
             </Page>
           </div>
         ))}
       </Document>
-      <div style={{height:'200px',}}/>
+      <canvas
+        ref={canvasRef}
+        style={{ display: "none" }} // Hide canvas from UI
+      />
+      <div style={{ height: "200px" }} />
     </div>
   );
 };

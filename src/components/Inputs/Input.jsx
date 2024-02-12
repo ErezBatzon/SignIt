@@ -11,37 +11,20 @@ const Input = ({
 
   useEffect(() => {
     if (input.id === activeInput) {
-      //inputRef.current.focus();
 
-      // Scroll the input into view only if it's not already visible
-      // if (input.type === "signature") {
-      //   inputRef.current.scrollIntoView({
-      //     behavior: "smooth",
-      //     block: "center",
-      //     inline: "nearest",
-      //   })
-      //   inputRef.current.focus();
-      // } else {
       inputRef.current.scrollIntoView({
         behavior: "smooth",
         block: "center",
         inline: "nearest",
       });
       inputRef.current.focus();
-      //}
 
-      //onSetFocusToSelectedField(input);
-      //console.log(input);
-
-      //if (input.type !== "signature") {
-      //inputRef.current.focus();
       inputRef.current.classList.add("focused");
       inputRef.current.classList.add("zoom-in");
       setTimeout(() => {
         inputRef.current.classList.remove("zoom-in");
         inputRef.current.classList.add("zoom-out");
       }, 500);
-      //}
     } else {
       inputRef.current.classList.remove("focused", "zoom-in", "zoom-out");
     }
