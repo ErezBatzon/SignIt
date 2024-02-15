@@ -9,8 +9,7 @@ const MainInput = ({
   currentInputObj,
   onSetFocusToNextField,
 }) => {
-
-  const signatureRef = useRef(null)
+  const signatureRef = useRef(null);
 
   function handleKeyPress(event) {
     if (event.key === "Enter") {
@@ -25,12 +24,25 @@ const MainInput = ({
 
   if (currentInputObj.type === "signature") {
     return (
-      <div ref={mainInputRef} tabIndex={5}>
-       <SignatureCanvas
+      <div
+        ref={mainInputRef}
+        tabIndex={5}
+        style={{
+          backgroundColor: "white",
+          borderRadius: "10px",
+          width: 155,
+          height: 75,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        onKeyDown={handleKeyPress}
+      >
+        <SignatureCanvas
           ref={signatureRef}
           penColor="#0d2d6d"
-          backgroundColor= 'transparent'
-          canvasProps={{width:150,height:70}}
+          backgroundColor="transparent"
+          canvasProps={{ width: 150, height: 70 }}
           onEnd={handleEndSignature}
         />
       </div>

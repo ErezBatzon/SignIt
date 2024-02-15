@@ -1,0 +1,85 @@
+.simple-fill {
+  justify-self: center;
+  align-self: center;
+  margin-top: 7rem;
+  width: 85%;
+  height: 70%;
+  background:rgba(255,255,255, 0.9);
+  box-shadow: rgba(48, 51, 67, 0.95) 0px 20px 50px -25px,
+    rgba(48, 55, 75, 0.92) 0px 20px 50px -35px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  direction: rtl;
+}
+
+.container {
+  background-color: transparent;
+  margin-top: 3rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.input {
+  background-color: transparent;
+  width: 40%;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding-right: 10px;
+  height: 2.2rem;
+  border: 1px dashed #2b4451;
+}
+
+.input-label {
+  background-color: transparent;
+  margin: 20px;
+  width: 6rem;
+}
+
+.input:required {
+  border: 1px dashed red;
+}
+
+.input:required.focused {
+  border: 2px solid #2b4451;
+  box-shadow: 5px 5px 8px 1px #2b4451;
+}
+
+.input[type="date"] {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+
+.signature-container{
+    border-radius: 2px;
+    border: 1px dashed #2b4451;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .signature-container.focused{
+    background-color: 'transparent';
+    border: 2px solid #2b4451;
+    box-shadow: 5px 5px 8px 1px #2b4451;
+  }
+  
+  .signature-container.required{
+    border: 1px dashed red;
+  }
+
+
+  .Finished{
+    justify-self: end;
+    margin-bottom: 2rem;
+  }

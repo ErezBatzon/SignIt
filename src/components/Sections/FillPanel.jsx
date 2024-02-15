@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import MainInput from "./Inputs/MainInput";
+import MainInput from "../Inputs/MainInput";
 
 const FillPanel = ({
   onSetFocusToNextField,
@@ -9,25 +9,31 @@ const FillPanel = ({
   mainInputRef,
   currentInputObj,
   currentValue,
+  dataLength,
+  isSimpleFill,
+  onFinished
 }) => {
   useEffect(() => {
+    if(!isSimpleFill){
       mainInputRef.current.classList.add("main-input-zoon-in");
       setTimeout(() => {
         mainInputRef.current.classList.remove("main-input-zoon-in");
         mainInputRef.current.classList.add("zoom-out");
       }, 200);
-
-
+  
       return () => {
-        mainInputRef.current.classList.remove("main-input-zoon-in", "zoom-out");
+        mainInputRef.current?.classList.remove("main-input-zoon-in", "zoom-out");
       };
+    }
   }, [currentInputObj]);
+
+  const finished = currentInputObj.id === dataLength;
 
   return (
     <div className="fill-field-panel">
       <div className="input-filler">
         <p className="description">
-         מילוי שדה: {" "}
+          מילוי שדה:{" "}
           <span className="input-description">
             {currentInputObj.description}
           </span>
@@ -42,11 +48,17 @@ const FillPanel = ({
         />
       </div>
       <div className="fill-navigation-buttons">
-        <button onClick={() => onSetFocusToNextField()} className="next">
-         הבא
-        </button>
+        {finished ? (
+          <button onClick={()=> onFinished()} className="Finished">
+            סיום
+          </button>
+        ) : (
+          <button onClick={() => onSetFocusToNextField()} className="next">
+            הבא
+          </button>
+        )}
         <button onClick={() => onSetFocusToPrevField()} className="previous">
-           הקודם
+          הקודם
         </button>
       </div>
     </div>

@@ -48,9 +48,10 @@ const Input = ({
   if (input.type === "signature") {
     return (
       <canvas
-        className="signature"
+        className={`signature ${input.required === 1 ? 'required' : ''}`}
         tabIndex={0}
         ref={inputRef}
+        required = {input.required === 1}
         onFocus={() => onSetFocusToSelectedField(input)}
         style={{
           position: "absolute",
@@ -73,11 +74,12 @@ const Input = ({
         left: `${input.positionX}%`,
         top: `${input.positionY}%`,
         width: `${input.width}%`,
-        height: `${"1.1"}%`,
+        height: `${"1.4"}%`,
       }}
       readOnly
       ref={inputRef}
       value={currentValue[input.id]}
+      required = {input.required === 1}
       autoFocus={input.id === 1}
       onFocus={() => onSetFocusToSelectedField(input)}
     ></input>
