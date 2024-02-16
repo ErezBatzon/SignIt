@@ -1,9 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+:root{
+  --main-green: #00ab72;
+  --main-color: #2b4451;
+  --main-white: #f4f7fa;
+}
+
 * {
   font-family: "calibri", sans-serif;
   font-size: 1.1rem;
-  background-color: #f4f7fa;
+  background-color: var(--main-white);
 }
 
 div{
@@ -86,16 +92,23 @@ div{
    padding-right: 10px;
    margin: 5px
 }
+.main-input-signature-container{
+  display: flex;
+  background-color: transparent;
+  justify-content: end;
+  align-items: end;
+  margin-left: 20px;
+}
 
 .signature{
   border-radius: 2px;
-  border: 1px dashed #2b4451;
+  border: 1px dashed var(--main-color);
 }
 
 .signature.focused{
   background-color: 'transparent';
-  border: 2px solid #2b4451;
-  box-shadow: 5px 5px 8px 1px #2b4451;
+  border: 2px solid var(--main-color);
+  box-shadow: 5px 5px 8px 1px var(--main-color);
 }
 
 .signature.required{
@@ -103,18 +116,18 @@ div{
 }
 
 .pdf-input.focused{
-  border: 2px solid #2b4451;
-  box-shadow: 5px 5px 8px 1px #2b4451;
+  border: 2px solid var(--main-color);
+  box-shadow: 5px 5px 8px 1px var(--main-color);
 }
 
 .signature.required.focused{
-  border: 2px solid #2b4451;
-  box-shadow: 5px 5px 8px 1px #2b4451;
+  border: 2px solid var(--main-color);
+  box-shadow: 5px 5px 8px 1px var(--main-color);
 }
 
 .pdf-input{
   border-radius: 2px;
-  border: 1px dashed #2b4451;
+  border: 1px dashed var(--main-color);
   font-size: 0.8rem;
   direction: rtl;
   padding-right: 3px;
@@ -126,7 +139,7 @@ div{
 
 .pdf-input:required.focused{
   border: 2px solid #2b4451;
-  box-shadow: 5px 5px 8px 1px #2b4451;
+  box-shadow: 5px 5px 8px 1px var(--main-color);
 }
 
 .pdf-input[type='date']{
@@ -260,8 +273,8 @@ button {
 }
 
 .Finished{
-  background-color: #74b72e;
-  color: black;
+  background-color: var(--main-green);
+  color: white;
   font-weight: 600;
   font-size: 1.1rem;
   padding: 0.5rem 1rem 0.5rem 1rem;

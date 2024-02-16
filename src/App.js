@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "./App.css";
+import "./App.scss";
 import FillPanel from "./components/Sections/FillPanel";
 import PdfViewer from "./components/Sections/PdfViewer";
 import data from "./data/inputs";

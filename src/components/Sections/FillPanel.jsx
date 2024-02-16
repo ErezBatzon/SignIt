@@ -15,6 +15,7 @@ const FillPanel = ({
   data,
   activeInput,
 }) => {
+
   useEffect(() => {
     if (!mainInputRef) {
       if (!isSimpleFill) {

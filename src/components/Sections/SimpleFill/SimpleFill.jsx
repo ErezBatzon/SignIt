@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "./simple-fill.css";
 import SignatureCanvas from "react-signature-canvas";
-import { clear } from "@testing-library/user-event/dist/clear";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const SimpleFill = ({
   input,
@@ -20,8 +20,8 @@ const SimpleFill = ({
     handleSignatureData(signatureRef.current.toDataURL());
   };
 
-  const clearSignature = () => {
-    //signatureRef.current.clear();
+  function clearSignature() {
+    signatureRef.current.clear();
   };
 
   useEffect(() => {
@@ -32,7 +32,13 @@ const SimpleFill = ({
       }
     });
   }, []);
-  
+
+  window.onload = function () {
+    var date = new Date();
+    var month = date.getMonth();
+    var day = date.getDate();
+    var year = date.getFullYear();
+  };
 
   return (
     <div className="simple-fill">
@@ -44,38 +50,53 @@ const SimpleFill = ({
             </label>
             {input.type === "signature" ? (
               <div
-                className={`signature-container ${
-                  input.required === 1 ? "required" : ""
-                }`}
-                tabIndex={input.id}
+                style={{
+                  display: "flex",
+                  alignItems: "end",
+                  backgroundColor: "transparent",
+                }}
               >
-                <SignatureCanvas
-                  ref={signatureRef}
-                  penColor="#0d2d6d"
-                  backgroundColor="transparent"
-                  canvasProps={{ width: 200, height: 70 }}
-                  onEnd={handleEndSignature}
-                  onBegin={() => {
-                    clearSignature();
-                    onSetFocusToSelectedField(input);
+                <RiDeleteBin6Line
+                  onClick={() => clearSignature()}
+                  style={{
+                    backgroundColor: "transparent",
+                    color: "black",
+                    marginLeft: "10",
                   }}
-                  tabIndex={input.id}
                 />
+                <div
+                  className={`signature-container ${
+                    input.required === 1 ? "required" : ""
+                  }`}
+                  tabIndex={input.id}
+                >
+                  <SignatureCanvas
+                    ref={signatureRef}
+                    penColor="#0d2d6d"
+                    backgroundColor="transparent"
+                    canvasProps={{ width: 200, height: 70 }}
+                    onEnd={handleEndSignature}
+                    onBegin={() => {
+                      //clearSignature();
+                      onSetFocusToSelectedField(input);
+                    }}
+                    tabIndex={input.id}
+                  />
+                </div>
               </div>
             ) : (
-              // <input
-              //   className="input"
-              //   key={input.id}
-              //   type={input.type}
-              //   placeholder={input.placeholder}
-              //   onChange={(e) => handleInputText(e.target.value)}
-              //   value={currentValue[input.id]}
-              //   required={input.required === 1}
-              //   autoFocus={input.id === 1}
-              //   onFocus={() => onSetFocusToSelectedField(input)}
-              // ></input>
-              <date-input date="{{date}}" timezone="[[timezone]]"></date-input>
-
+              <input
+                className="input"
+                key={input.id}
+                type={input.type}
+                placeholder={input.placeholder}
+                onChange={(e) => handleInputText(e.target.value)}
+                value={currentValue[input.id]}
+                required={input.required === 1}
+                autoFocus={input.id === 1}
+                onFocus={() => onSetFocusToSelectedField(input)}
+              ></input>
+              //<input type="date" id="date" />
             )}
           </div>
         ))}
