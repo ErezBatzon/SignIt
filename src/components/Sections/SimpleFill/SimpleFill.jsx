@@ -1,4 +1,4 @@
-import {useRef,useEffect} from "react";
+import { useRef, useEffect } from "react";
 import "./simple-fill.css";
 import SignatureCanvas from "react-signature-canvas";
 import { clear } from "@testing-library/user-event/dist/clear";
@@ -11,9 +11,8 @@ const SimpleFill = ({
   data,
   handleSignatureData,
   handleInputText,
-  onFinished
+  onFinished,
 }) => {
-
   const signatureRef = useRef(null);
 
   const handleEndSignature = () => {
@@ -21,19 +20,19 @@ const SimpleFill = ({
     handleSignatureData(signatureRef.current.toDataURL());
   };
 
-
   const clearSignature = () => {
     //signatureRef.current.clear();
   };
 
   useEffect(() => {
-    data.forEach(input => {
-      if (input.type === 'signature') {
+    data.forEach((input) => {
+      if (input.type === "signature") {
         signatureRef.current.fromDataURL(currentValue[input.id]);
-        signatureRef.current.canvasProps={width:200,height:80}
+        signatureRef.current.canvasProps = { width: 200, height: 80 };
       }
     });
   }, []);
+  
 
   return (
     <div className="simple-fill">
@@ -45,7 +44,10 @@ const SimpleFill = ({
             </label>
             {input.type === "signature" ? (
               <div
-                className={`signature-container ${input.required === 1 ? 'required' : ''}`}
+                className={`signature-container ${
+                  input.required === 1 ? "required" : ""
+                }`}
+                tabIndex={input.id}
               >
                 <SignatureCanvas
                   ref={signatureRef}
@@ -55,29 +57,32 @@ const SimpleFill = ({
                   onEnd={handleEndSignature}
                   onBegin={() => {
                     clearSignature();
-                    onSetFocusToSelectedField(input)
+                    onSetFocusToSelectedField(input);
                   }}
+                  tabIndex={input.id}
                 />
               </div>
             ) : (
-              <input
-                className="input"
-                key={input.id}
-                type={input.type}
-                placeholder={input.placeholder}
-                onChange={(e) => handleInputText(e.target.value)}
-                value={currentValue[input.id]}
-                required={input.required === 1}
-                autoFocus={input.id === 1}
-                onFocus={() => onSetFocusToSelectedField(input)}
-              ></input>
+              // <input
+              //   className="input"
+              //   key={input.id}
+              //   type={input.type}
+              //   placeholder={input.placeholder}
+              //   onChange={(e) => handleInputText(e.target.value)}
+              //   value={currentValue[input.id]}
+              //   required={input.required === 1}
+              //   autoFocus={input.id === 1}
+              //   onFocus={() => onSetFocusToSelectedField(input)}
+              // ></input>
+              <date-input date="{{date}}" timezone="[[timezone]]"></date-input>
+
             )}
           </div>
         ))}
       </div>
-      <button onClick={()=> onFinished()} className="finished-button">
-            סיום
-          </button>
+      <button onClick={() => onFinished()} className="finished-button">
+        סיום
+      </button>
     </div>
   );
 };

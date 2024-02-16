@@ -82,4 +82,9 @@
   .finished-button{
     justify-self: end;
     margin-bottom: 2rem;
+    background-color: #74b72e;
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
   }
