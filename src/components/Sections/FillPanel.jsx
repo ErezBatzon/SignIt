@@ -11,19 +11,26 @@ const FillPanel = ({
   currentValue,
   dataLength,
   isSimpleFill,
-  onFinished
+  onFinished,
+  data,
+  activeInput,
 }) => {
   useEffect(() => {
-    if(!isSimpleFill){
-      mainInputRef.current.classList.add("main-input-zoon-in");
-      setTimeout(() => {
-        mainInputRef.current.classList.remove("main-input-zoon-in");
-        mainInputRef.current.classList.add("zoom-out");
-      }, 200);
-  
-      return () => {
-        mainInputRef.current?.classList.remove("main-input-zoon-in", "zoom-out");
-      };
+    if (!mainInputRef) {
+      if (!isSimpleFill) {
+        mainInputRef.current.classList.add("main-input-zoon-in");
+        setTimeout(() => {
+          mainInputRef.current.classList.remove("main-input-zoon-in");
+          mainInputRef.current.classList.add("zoom-out");
+        }, 200);
+
+        return () => {
+          mainInputRef.current?.classList.remove(
+            "main-input-zoon-in",
+            "zoom-out"
+          );
+        };
+      }
     }
   }, [currentInputObj]);
 
@@ -32,12 +39,12 @@ const FillPanel = ({
   return (
     <div className="fill-field-panel">
       <div className="input-filler">
-        <p className="description">
+        {/* <p className="description">
           מילוי שדה:{" "}
           <span className="input-description">
             {currentInputObj.description}
           </span>
-        </p>
+        </p> */}
         <MainInput
           mainInputRef={mainInputRef}
           handleInputText={handleInputText}
@@ -45,11 +52,13 @@ const FillPanel = ({
           currentValue={currentValue}
           currentInputObj={currentInputObj}
           onSetFocusToNextField={onSetFocusToNextField}
+          data={data}
+          activeInput={activeInput}
         />
       </div>
       <div className="fill-navigation-buttons">
         {finished ? (
-          <button onClick={()=> onFinished()} className="Finished">
+          <button onClick={() => onFinished()} className="Finished">
             סיום
           </button>
         ) : (

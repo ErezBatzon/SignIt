@@ -11,13 +11,14 @@ const Input = ({
 
   useEffect(() => {
     if (input.id === activeInput) {
-
+      
+      inputRef.current.focus();
       inputRef.current.scrollIntoView({
         behavior: "smooth",
         block: "center",
         inline: "nearest",
       });
-      inputRef.current.focus();
+      //console.log(inputRef.current)
 
       inputRef.current.classList.add("focused");
       inputRef.current.classList.add("zoom-in");
@@ -68,7 +69,7 @@ const Input = ({
     <input
       className="pdf-input"
       type={input.type}
-      placeholder={input.placeholder}
+      placeholder={input.description}
       style={{
         position: "absolute",
         left: `${input.positionX}%`,

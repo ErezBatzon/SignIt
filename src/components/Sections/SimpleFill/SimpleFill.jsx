@@ -75,7 +75,7 @@ const SimpleFill = ({
           </div>
         ))}
       </div>
-      <button onClick={()=> onFinished()} className="Finished">
+      <button onClick={()=> onFinished()} className="finished-button">
             סיום
           </button>
     </div>

@@ -52,6 +52,8 @@ const App = () => {
     }
   }
 
+
+
   function onSetSimpleFill(isChecked) {
     setSimpleFill(isChecked);
   }
@@ -107,6 +109,8 @@ const App = () => {
             dataLength={dataLength}
             isSimpleFill={isSimpleFill}
             onFinished={onFinished}
+            data={data}
+            activeInput={activeInput}
           />
         </>
       )}
