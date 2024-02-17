@@ -18,9 +18,9 @@ const Navbar = ({inputValues,data,onSetSimpleFill}) => {
 
   return (
     <div className="navbar">
-      <p className="header">SignIt</p>
+      <p className="header" onClick={() => window.location.reload()}>SignIt</p>
       <div className="progressbar">
-        <ProgressBar striped animated now={now} min={0} max={100} variant="success"/>
+        <ProgressBar striped animated label={now} now={now} min={0} max={100} variant="success"/>
       </div>
       <Toggle onSetSimpleFill={onSetSimpleFill}/>
     </div>

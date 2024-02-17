@@ -1,5 +1,5 @@
 .signature {
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px dashed var(--main-color);
 }
 
@@ -10,17 +10,14 @@
 }
 
 .signature.required {
-  border: 1px dashed red;
-}
-
-.pdf-input.focused {
-  border: 2px solid var(--main-color);
-  box-shadow: 5px 5px 8px 1px var(--main-color);
+  border: 1px dashed var(--main-red);
 }
 
 .signature.required.focused {
   border: 2px solid var(--main-color);
-  box-shadow: 5px 5px 8px 1px var(--main-color);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .pdf-input[type="date"]::-webkit-inner-spin-button,
@@ -30,7 +27,7 @@
 }
 
 .pdf-input {
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px dashed var(--main-color);
   font-size: 0.8rem;
   direction: rtl;
@@ -42,17 +39,23 @@
 }
 
 .pdf-input:required {
-  border: 1px dashed red;
+  border: 1px dashed var(--main-red);
 }
 
 .pdf-input:required.focused {
-  border: 2px solid #2b4451;
-  box-shadow: 5px 5px 8px 1px var(--main-color);
+  border: 2px solid #c75146;
 }
 
 .pdf-input[type="date"] {
   font-size: 0.8rem;
   text-align: center;
+}
+
+.pdf-input.focused {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--main-color);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 @media (max-width: 600px) {

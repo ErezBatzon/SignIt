@@ -33,7 +33,7 @@
 .input {
   background-color: transparent;
   width: 40%;
-  border-radius: 15px;
+  border-radius: 10px;
   font-size: 1rem;
   padding-right: 10px;
   height: 2.2rem;
@@ -69,7 +69,7 @@
 }
 
 .signature-container {
-  border-radius: 15px;
+  border-radius: 10px;
   box-sizing: border-box;
   border: 1px dashed #2b4451;
   display: flex;
@@ -86,7 +86,7 @@
 }
 
 .signature-container.required {
-  border: 1px dashed red;
+  border: 1px dashed var(--main-red);
 }
 
 .finished-button {

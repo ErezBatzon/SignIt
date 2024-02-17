@@ -10,24 +10,30 @@
   background-color: white;
   width: 100%;
   border-bottom: 1px lightgray solid;
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .progressbar {
   flex: 1;
   text-align: center;
-  padding-left: 18%;
-  padding-right: 22%;
+  padding-left: 10%;
+  padding-right: 16%;
   background-color: transparent;
 }
 
 .header {
-  margin-left: 15px; /* Add left margin to the header */
-  font-size: 1.7rem;
+  margin-left: 20px;
+  font-size: 2rem;
   font-style: italic;
   font-weight: 500;
   font-family: "Yellowtail", cursive;
-  color: #000;
+  color: var(--main-color);
   text-decoration: underline;
+}
+
+.header:hover{
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import "./Main-Input.css";
@@ -31,6 +31,17 @@ const MainInput = ({
     signatureRef.current.clear();
     handleSignatureData(null);
   }
+
+  useEffect(() => {
+    data.forEach((input) => {
+      if (input.type === "signature") {
+        signatureRef.current?.fromDataURL(currentValue[input.id]);
+        if (signatureRef.current) {
+          signatureRef.current.canvasProps = { width: 150, height: 80 };
+        }
+      }
+    });
+  }, [activeInput]);
 
   const signatureInput = data.map((input) => {
     if (input.id === activeInput && input.type === "signature") {
