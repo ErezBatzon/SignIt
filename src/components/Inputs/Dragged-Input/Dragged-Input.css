@@ -1,0 +1,6 @@
+.draggable-input {
+    position: absolute;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: move;
+  }

@@ -1,22 +1,27 @@
 import { useState, useRef } from "react";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "./App.scss";
-import FillPanel from "./components/Sections/FillPanel";
-import PdfViewer from "./components/Sections/PdfViewer";
+import "./App.css";
+import FillPanel from "./components/Sections/FillPanel/FillPanel";
+import PdfViewer from "./components/Sections/PdfViewer/PdfViewer";
 import data from "./data/inputs";
-import Navbar from "./components/Sections/Navbar";
+import Navbar from "./components/Sections/Navbar/Navbar";
 import SimpleFill from "./components/Sections/SimpleFill/SimpleFill";
 
 const App = () => {
   const [activeInput, setActiveInput] = useState(1);
   const [currentInputObj, setCurrentInputObj] = useState(data[0]);
   const mainInputRef = useRef(null);
-  const [inputValues, setInputValues] = useState({});
+  const [inputValues, setInputValues] = useState(
+    data.reduce((acc, curr) => {
+      acc[curr.id] = undefined;
+      return acc;
+    }, {})
+  );
   const [isSimpleFill, setSimpleFill] = useState(false);
 
   const dataLength = data.length;
 
-  const pdfViewer = useRef(null)
+  const pdfViewer = useRef(null);
 
   function onSetFocusToNextField() {
     setActiveInput((prevInput) => prevInput + 1);
@@ -28,8 +33,29 @@ const App = () => {
     }
     setActiveInput((prevInput) => prevInput - 1);
   }
-  function onFinished(){
-    pdfViewer.current.CallChildFunc();
+  function onFinished() {
+    const emptyIds = Object.entries(inputValues)
+      .filter(([id, value]) => (value === "" || value === undefined))
+      .map(([id, value]) => parseInt(id));
+
+    const requiredEmptyIds = emptyIds
+      .filter((id) => {
+        const matchingField = data.find((item) => item.id === id);
+        return matchingField && matchingField.required === 1;
+      })
+      .map((id) => {
+        const matchingField = data.find((item) => item.id === id);
+        return { id: matchingField.id, description: matchingField.description };
+      });
+
+    if (requiredEmptyIds.length !== 0) {
+      window.alert(
+        "יש למלא את השדות הבאים: " +
+          requiredEmptyIds.map((value) => value.description)
+      );
+    } else {
+      pdfViewer.current.CallChildFunc();
+    }
   }
 
   // Function to update input values
@@ -48,10 +74,9 @@ const App = () => {
       setActiveInput(input.id);
       setCurrentInputObj(input);
       mainInputRef.current.focus();
-      mainInputRef.current.value = inputValues[input.id] || "";
+      mainInputRef.current.value = inputValues[input.id] || '';
     }
   }
-
 
 
   function onSetSimpleFill(isChecked) {
@@ -65,6 +90,7 @@ const App = () => {
   function handleSignatureData(activeInput, data) {
     handleInputChange(activeInput, data);
   }
+
 
   return (
     <div className="page">
@@ -84,6 +110,7 @@ const App = () => {
           currentValue={inputValues}
           handleSignatureData={(data) => handleSignatureData(activeInput, data)}
           handleInputText={(text) => handleInputText(activeInput, text)}
+          onFinished={onFinished}
         />
       ) : (
         <>
@@ -111,6 +138,7 @@ const App = () => {
             onFinished={onFinished}
             data={data}
             activeInput={activeInput}
+            onChecked={(checked) => handleInputText(activeInput, checked ? checked : undefined)}
           />
         </>
       )}

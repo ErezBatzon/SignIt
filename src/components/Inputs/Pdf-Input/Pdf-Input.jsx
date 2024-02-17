@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import './Pdf-Input.css'
 
 const Input = ({
   input,
@@ -40,7 +41,7 @@ const Input = ({
         canvas.height = image.height; // Multiply by a factor to enlarge
         ctx.drawImage(image, 0, 0);
     };
-      image.src = currentValue[input.id];
+      image.src = currentValue[input.id] ? currentValue[input.id] : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAABGCAYAAAAuP23NAAAAAXNSR0IArs4c6QAAAUhJREFUeF7t0jENAAAMw7CVP+mhyOcC6BF5ZwoEBRZ8ulTgwIIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjp9b5wAR6B4r9MAAAAASUVORK5CYII=';
     }
   }, [activeInput]);
 
@@ -65,6 +66,9 @@ const Input = ({
     );
   }
 
+  const width = input.type !== 'checkbox' ? `${input.width}%` : '20px'
+
+  console.log(input.type)
   return (
     <input
       className="pdf-input"
@@ -74,15 +78,18 @@ const Input = ({
         position: "absolute",
         left: `${input.positionX}%`,
         top: `${input.positionY}%`,
-        width: `${input.width}%`,
-        height: `${"1.4"}%`,
+        width: width,
+        height: `${"2"}%`,
       }}
       readOnly
+      onClick={input.type === 'checkbox' ? (e) => e.preventDefault() : null}
       ref={inputRef}
       value={currentValue[input.id]}
       required = {input.required === 1}
       autoFocus={input.id === 1}
       onFocus={() => onSetFocusToSelectedField(input)}
+      checked={input.type === 'checkbox' && currentValue[input.id]}
+      tabIndex={input.id}
     ></input>
   );
 };

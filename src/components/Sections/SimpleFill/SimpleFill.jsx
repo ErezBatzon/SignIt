@@ -1,7 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./simple-fill.css";
 import SignatureCanvas from "react-signature-canvas";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { GrCheckmark } from "react-icons/gr";
 
 const SimpleFill = ({
   input,
@@ -13,6 +14,33 @@ const SimpleFill = ({
   handleInputText,
   onFinished,
 }) => {
+
+  const [canvasWidth,setCanvasWidth] = useState(window.innerWidth/4)
+
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      setCanvasWidth(window.innerWidth/4);
+    }, 300); // Adjust debounce delay as needed
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [canvasWidth]);
+
+  console.log(canvasWidth)
+
+  const debounce = (func, delay) => {
+    let timer;
+    return function (...args) {
+      const context = this;
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+
+
   const signatureRef = useRef(null);
 
   const handleEndSignature = () => {
@@ -22,23 +50,18 @@ const SimpleFill = ({
 
   function clearSignature() {
     signatureRef.current.clear();
+    handleSignatureData(null);
   };
 
   useEffect(() => {
     data.forEach((input) => {
       if (input.type === "signature") {
         signatureRef.current.fromDataURL(currentValue[input.id]);
-        signatureRef.current.canvasProps = { width: 200, height: 80 };
+        signatureRef.current.canvasProps = { width: canvasWidth, height: 80 };
       }
     });
-  }, []);
+  }, [canvasWidth]);
 
-  window.onload = function () {
-    var date = new Date();
-    var month = date.getMonth();
-    var day = date.getDate();
-    var year = date.getFullYear();
-  };
 
   return (
     <div className="simple-fill">
@@ -49,19 +72,14 @@ const SimpleFill = ({
               {input.description}
             </label>
             {input.type === "signature" ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "end",
-                  backgroundColor: "transparent",
-                }}
-              >
+              <div className="signature-parent-container">
                 <RiDeleteBin6Line
                   onClick={() => clearSignature()}
+                  width={30}
                   style={{
                     backgroundColor: "transparent",
                     color: "black",
-                    marginLeft: "10",
+                    marginLeft: "5",
                   }}
                 />
                 <div
@@ -74,7 +92,7 @@ const SimpleFill = ({
                     ref={signatureRef}
                     penColor="#0d2d6d"
                     backgroundColor="transparent"
-                    canvasProps={{ width: 200, height: 70 }}
+                    canvasProps={{ width: canvasWidth, height: 60 }}
                     onEnd={handleEndSignature}
                     onBegin={() => {
                       //clearSignature();
@@ -96,12 +114,19 @@ const SimpleFill = ({
                 autoFocus={input.id === 1}
                 onFocus={() => onSetFocusToSelectedField(input)}
               ></input>
-              //<input type="date" id="date" />
             )}
           </div>
         ))}
       </div>
       <button onClick={() => onFinished()} className="finished-button">
+      <GrCheckmark
+            style={{
+              backgroundColor: "transparent",
+              color: "black",
+              marginLeft: "5",
+              marginBottom: 2,
+            }}
+          />
         סיום
       </button>
     </div>

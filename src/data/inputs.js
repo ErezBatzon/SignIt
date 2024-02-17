@@ -54,6 +54,17 @@ const data = [
       description: 'עיר מגורים',
       required: 0,
     },
+    {
+      id:6,
+      type: "checkbox",
+      placeholder: "6",
+      positionX: 67,
+      positionY: 40.3,
+      width:10,
+      page: 1,
+      description: 'חותם 1',
+      required: 1,
+    },
   ];
 
   export default data;

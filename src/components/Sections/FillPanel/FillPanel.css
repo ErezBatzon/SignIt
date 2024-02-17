@@ -1,0 +1,135 @@
+.main-input-zoon-in {
+  transition: transform 0.2s ease-in-out;
+  transform: scale(1.1);
+}
+
+
+.input-filler {
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .fill-navigation-buttons {
+    background-color: transparent;
+    margin: 5px;
+  }
+
+  .navigation-buttons {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .previous {
+    background-color: #eff6ff;
+    color: black;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  
+  .next {
+    background-color: #edae49;
+    color: black;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+  
+  .Finished{
+    background-color: var(--main-green);
+    color: black;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+
+
+  .description{
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    color: white;
+    margin: 0;
+    padding: 5px;
+  }
+
+  .fill-field-panel {
+    /* background: rgb(39, 68, 92,0.95); */
+    background: linear-gradient(119deg, rgba(60,93,124,0.95) 0%, rgba(9,40,70,0.9) 100%);
+    /* background:rgba(60,93,124,0.95); */
+      transform:
+        perspective(85em)
+        rotateX(10deg);
+      box-shadow:
+        rgba(1,58,99,0.95) 0px 40px 53px -30px;
+    border-radius: 15px 15px 0px 0px;
+    border: none;
+    width: 85%;
+    height: auto;
+    position: fixed;
+    align-self: center;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    transform: translateY(200px);
+    opacity: 0.5;
+    filter: blur(5px);
+    animation: showFillPanel 0.5s 0.5s ease-in 1 forwards;
+  }
+
+  @keyframes showFillPanel{
+    to{
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+  }
+
+  .zoom-in {
+    transition: transform 0.5s ease-in-out;
+    transform: scale(1.5);
+  }
+  
+  .zoom-out {
+    transition: transform 0.5s ease-in-out;
+    transform: scale(1);
+  }
+
+  @media (max-width: 600px) {
+  
+    .fill-field-panel {
+      width: 99%;
+    }
+  
+    .main-input{
+      width: 70vw;
+   }
+  
+   .main-input-zoon-in{
+    transition: transform 0.2s ease-in-out; 
+    transform: scale(1.1);
+  }
+
+  .pdf-input{
+    font-size: 0.3rem;
+  }
+  
+  .pdf-input[type="date"]{
+    font-size: 0.3rem;
+    font-family: "calibri", sans-serif;
+  }
+  
+  }
+  

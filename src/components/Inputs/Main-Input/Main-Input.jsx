@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import "./Main-Input.css";
 
 const MainInput = ({
   mainInputRef,
@@ -11,6 +12,7 @@ const MainInput = ({
   onSetFocusToNextField,
   data,
   activeInput,
+  onChecked,
 }) => {
   const signatureRef = useRef(null);
 
@@ -25,8 +27,9 @@ const MainInput = ({
     handleSignatureData(signatureRef.current.toDataURL());
   };
 
-  function clearSignature(){
+  function clearSignature() {
     signatureRef.current.clear();
+    handleSignatureData(null);
   }
 
   const signatureInput = data.map((input) => {
@@ -58,7 +61,11 @@ const MainInput = ({
           </div>
           <RiDeleteBin6Line
             onClick={() => clearSignature()}
-            style={{ backgroundColor: "transparent", color: "white", marginLeft: '10' }}
+            style={{
+              backgroundColor: "transparent",
+              color: "white",
+              marginLeft: "10",
+            }}
           />
         </div>
       );
@@ -75,12 +82,28 @@ const MainInput = ({
           className="main-input"
           type={currentInputObj.type}
           placeholder={"הקלד " + currentInputObj.description}
-          onChange={(e) => handleInputText(e.target.value)}
-          value={currentValue[currentInputObj.id]}
+          onChange={
+            currentInputObj.type !== "checkbox"
+              ? (e) => handleInputText(e.target.value)
+              : null
+          }
+          value={
+            currentInputObj.type !== "checkbox" &&
+            currentValue[currentInputObj.id]
+          }
           //value={inputText}
           ref={mainInputRef}
           style={{ direction: "rtl" }}
           onKeyDown={handleKeyPress}
+          checked={
+            currentInputObj.type === "checkbox" &&
+            currentValue[currentInputObj.id]
+          }
+          onClick={
+            currentInputObj.type === "checkbox"
+              ? (e) => onChecked(e.currentTarget.checked)
+              : null
+          }
         />
       ) : (
         signatureInput

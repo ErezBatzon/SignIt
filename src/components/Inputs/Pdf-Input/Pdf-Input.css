@@ -1,0 +1,78 @@
+.signature {
+  border-radius: 2px;
+  border: 1px dashed var(--main-color);
+}
+
+.signature.focused {
+  background-color: "transparent";
+  border: 2px solid var(--main-color);
+  box-shadow: 5px 5px 8px 1px var(--main-color);
+}
+
+.signature.required {
+  border: 1px dashed red;
+}
+
+.pdf-input.focused {
+  border: 2px solid var(--main-color);
+  box-shadow: 5px 5px 8px 1px var(--main-color);
+}
+
+.signature.required.focused {
+  border: 2px solid var(--main-color);
+  box-shadow: 5px 5px 8px 1px var(--main-color);
+}
+
+.pdf-input[type="date"]::-webkit-inner-spin-button,
+.pdf-input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.pdf-input {
+  border-radius: 2px;
+  border: 1px dashed var(--main-color);
+  font-size: 0.8rem;
+  direction: rtl;
+  padding-right: 3px;
+  font: "calibri", sans-serif;
+}
+
+.pdf-input[type="checkbox"] {
+}
+
+.pdf-input:required {
+  border: 1px dashed red;
+}
+
+.pdf-input:required.focused {
+  border: 2px solid #2b4451;
+  box-shadow: 5px 5px 8px 1px var(--main-color);
+}
+
+.pdf-input[type="date"] {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .pdf-input {
+    font-size: 0.3rem;
+  }
+
+  .pdf-input[type="date"] {
+    font-size: 0.3rem;
+    font-family: "calibri", sans-serif;
+  }
+}
+
+/* Media query for medium screens */
+@media (min-width: 601px) and (max-width: 900px) {
+  .pdf-input {
+    font-size: 0.5rem;
+  }
+
+  .pdf-input[type="date"] {
+    font-size: 0.5rem;
+  }
+}

@@ -4,7 +4,7 @@
   margin-top: 7rem;
   width: 85%;
   height: 70%;
-  background:rgba(255,255,255, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: rgba(48, 51, 67, 0.95) 0px 20px 50px -25px,
     rgba(48, 55, 75, 0.92) 0px 20px 50px -35px;
   border-radius: 10px;
@@ -27,12 +27,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  position: relative;
 }
 
 .input {
   background-color: transparent;
   width: 40%;
-  border-radius: 5px;
+  border-radius: 15px;
   font-size: 1rem;
   padding-right: 10px;
   height: 2.2rem;
@@ -59,32 +60,41 @@
   text-align: center;
 }
 
+.signature-parent-container {
+  display: flex;
+  align-items: end;
+  background-color: transparent;
+  width: 40%;
+  position: relative;
+}
 
-.signature-container{
-    border-radius: 2px;
-    border: 1px dashed #2b4451;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .signature-container.focused{
-    background-color: 'transparent';
-    border: 2px solid #2b4451;
-    box-shadow: 5px 5px 8px 1px #2b4451;
-  }
-  
-  .signature-container.required{
-    border: 1px dashed red;
-  }
+.signature-container {
+  border-radius: 15px;
+  box-sizing: border-box;
+  border: 1px dashed #2b4451;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 4.2rem;
+}
 
+.signature-container.focused {
+  background-color: "transparent";
+  border: 2px solid #2b4451;
+  box-shadow: 5px 5px 8px 1px #2b4451;
+}
 
-  .finished-button{
-    justify-self: end;
-    margin-bottom: 2rem;
-    background-color: var(--main-green);
-    color: black;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-  }
+.signature-container.required {
+  border: 1px dashed red;
+}
+
+.finished-button {
+  justify-self: end;
+  margin-bottom: 2rem;
+  background-color: var(--main-green);
+  color: black;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+}

@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
-import MainInput from "../Inputs/MainInput";
+import MainInput from "../../Inputs/Main-Input/Main-Input";
+import "./FillPanel.css";
+import { GrFormPreviousLink } from "react-icons/gr";
+import { GrFormNextLink } from "react-icons/gr";
+import { GrCheckmark } from "react-icons/gr";
 
 const FillPanel = ({
   onSetFocusToNextField,
@@ -14,8 +18,8 @@ const FillPanel = ({
   onFinished,
   data,
   activeInput,
+  onChecked,
 }) => {
-
   useEffect(() => {
     if (!mainInputRef) {
       if (!isSimpleFill) {
@@ -40,12 +44,12 @@ const FillPanel = ({
   return (
     <div className="fill-field-panel">
       <div className="input-filler">
-        {/* <p className="description">
-          מילוי שדה:{" "}
-          <span className="input-description">
-            {currentInputObj.description}
-          </span>
-        </p> */}
+        {
+          <p className="description">
+            {currentInputObj.required === 1 && "* שדה חובה"}{" "}
+            {currentInputObj.type === "checkbox" && currentInputObj.description}
+          </p>
+        }
         <MainInput
           mainInputRef={mainInputRef}
           handleInputText={handleInputText}
@@ -55,20 +59,49 @@ const FillPanel = ({
           onSetFocusToNextField={onSetFocusToNextField}
           data={data}
           activeInput={activeInput}
+          onChecked={onChecked}
         />
       </div>
       <div className="fill-navigation-buttons">
         {finished ? (
-          <button onClick={() => onFinished()} className="Finished">
+          <button
+            type="submit"
+            onClick={() => onFinished()}
+            className="Finished"
+          >
             סיום
+            <GrCheckmark
+              style={{
+                backgroundColor: "transparent",
+                color: "black",
+                marginLeft: "5",
+                marginBottom: 2,
+              }}
+            />
           </button>
         ) : (
           <button onClick={() => onSetFocusToNextField()} className="next">
+            <GrFormPreviousLink
+              style={{
+                backgroundColor: "transparent",
+                color: "black",
+                marginRight: "5",
+                marginBottom: 2,
+              }}
+            />
             הבא
           </button>
         )}
         <button onClick={() => onSetFocusToPrevField()} className="previous">
           הקודם
+          <GrFormNextLink
+            style={{
+              backgroundColor: "transparent",
+              color: "black",
+              marginLeft: "5",
+              marginBottom: 2,
+            }}
+          />
         </button>
       </div>
     </div>
