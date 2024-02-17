@@ -101,9 +101,7 @@ const App = () => {
       />
       {isSimpleFill ? (
         <SimpleFill
-          input={currentInputObj}
           data={data}
-          activeInput={activeInput}
           onSetFocusToSelectedField={(input) =>
             onSetFocusToSelectedField(input)
           }

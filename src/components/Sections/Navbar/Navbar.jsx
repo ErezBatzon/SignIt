@@ -6,23 +6,32 @@ import { LiaSignatureSolid } from "react-icons/lia";
 import { PiSignatureLight } from "react-icons/pi";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Toggle from "../../UI/Toggle";
-import './Navbar.css'
+import "./Navbar.css";
 
-
-const Navbar = ({inputValues,data,onSetSimpleFill}) => {
-  
-  const totalLength = data.length
-  const valuesLength = Object.values(inputValues).filter(value => (value !== null && value !== "" && value !== undefined)).length;
-  const now = (valuesLength/totalLength) * 100
-  
+const Navbar = ({ inputValues, data, onSetSimpleFill }) => {
+  const totalLength = data.length;
+  const valuesLength = Object.values(inputValues).filter(
+    (value) => value !== null && value !== "" && value !== undefined
+  ).length;
+  const now = (valuesLength / totalLength) * 100;
 
   return (
     <div className="navbar">
-      <p className="header" onClick={() => window.location.reload()}>SignIt</p>
+      <p className="header" onClick={() => window.location.reload()}>
+        SignIt
+      </p>
       <div className="progressbar">
-        <ProgressBar striped animated label={now} now={now} min={0} max={100} variant="success"/>
+        <ProgressBar
+          striped
+          animated
+          label={Math.round(now, 0) + "%"}
+          now={now}
+          min={0}
+          max={100}
+          variant="success"
+        ></ProgressBar>
       </div>
-      <Toggle onSetSimpleFill={onSetSimpleFill}/>
+      <Toggle onSetSimpleFill={onSetSimpleFill} />
     </div>
   );
 };

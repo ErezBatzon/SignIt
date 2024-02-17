@@ -5,8 +5,6 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrCheckmark } from "react-icons/gr";
 
 const SimpleFill = ({
-  input,
-  activeInput,
   currentValue,
   onSetFocusToSelectedField,
   data,
@@ -19,7 +17,7 @@ const SimpleFill = ({
 
   useEffect(() => {
     const handleResize = debounce(() => {
-      setCanvasWidth(window.innerWidth/4);
+      setCanvasWidth(window.innerWidth/4.2);
     }, 300); // Adjust debounce delay as needed
 
     window.addEventListener("resize", handleResize);
@@ -28,8 +26,6 @@ const SimpleFill = ({
       window.removeEventListener("resize", handleResize);
     };
   }, [canvasWidth]);
-
-  console.log(canvasWidth)
 
   const debounce = (func, delay) => {
     let timer;
@@ -69,6 +65,7 @@ const SimpleFill = ({
         {data.map((input, index) => (
           <div className="input-container" key={input.id}>
             <label className="input-label" htmlFor="input">
+              {input.required === 1 && '*'}
               {input.description}
             </label>
             {input.type === "signature" ? (
