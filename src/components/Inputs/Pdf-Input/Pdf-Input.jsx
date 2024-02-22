@@ -30,6 +30,10 @@ const Input = ({
       inputRef.current.classList.remove("focused", "zoom-in", "zoom-out");
     }
 
+    
+  }, [activeInput]);
+
+  useEffect(()=>{
     if (input.type === "signature") {
       const canvas = inputRef.current;
       const ctx = canvas.getContext("2d");
@@ -44,7 +48,7 @@ const Input = ({
         ? currentValue[input.id]
         : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAABGCAYAAAAuP23NAAAAAXNSR0IArs4c6QAAAUhJREFUeF7t0jENAAAMw7CVP+mhyOcC6BF5ZwoEBRZ8ulTgwIIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjoFi4GkAFhJVqdgMZAUACvJ6hQsBpICYCVZnYLFQFIArCSrU7AYSAqAlWR1ChYDSQGwkqxOwWIgKQBWktUpWAwkBcBKsjp9b5wAR6B4r9MAAAAASUVORK5CYII=";
     }
-  }, [activeInput]);
+  },[currentValue[input.id]])
 
   if (input.type === "signature") {
     return (

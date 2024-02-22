@@ -13,11 +13,11 @@ const SimpleFill = ({
   onFinished,
 }) => {
 
-  const [canvasWidth,setCanvasWidth] = useState(window.innerWidth/4)
+  const [canvasWidth,setCanvasWidth] = useState(window.innerWidth/4.5)
 
   useEffect(() => {
     const handleResize = debounce(() => {
-      setCanvasWidth(window.innerWidth/4.2);
+      setCanvasWidth(window.innerWidth/4.5);
     }, 300); // Adjust debounce delay as needed
 
     window.addEventListener("resize", handleResize);

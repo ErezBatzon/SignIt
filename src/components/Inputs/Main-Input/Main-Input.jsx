@@ -54,8 +54,8 @@ const MainInput = ({
             style={{
               backgroundColor: "white",
               borderRadius: "10px",
-              width: 155,
-              height: 75,
+              width: 260,
+              height: 110,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -66,7 +66,7 @@ const MainInput = ({
               ref={signatureRef}
               penColor="#0d2d6d"
               backgroundColor="transparent"
-              canvasProps={{ width: 150, height: 70 }}
+              canvasProps={{ width: 250, height: 100 }}
               onEnd={handleEndSignature}
             />
           </div>

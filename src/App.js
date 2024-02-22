@@ -6,6 +6,8 @@ import PdfViewer from "./components/Sections/PdfViewer/PdfViewer";
 import data from "./data/inputs";
 import Navbar from "./components/Sections/Navbar/Navbar";
 import SimpleFill from "./components/Sections/SimpleFill/SimpleFill";
+import { useParams } from "react-router-dom";
+
 
 const App = () => {
   const [activeInput, setActiveInput] = useState(1);
@@ -18,6 +20,9 @@ const App = () => {
     }, {})
   );
   const [isSimpleFill, setSimpleFill] = useState(false);
+
+  const params = useParams();
+  console.log(params)
 
   const dataLength = data.length;
 
